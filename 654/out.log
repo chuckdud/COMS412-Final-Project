@@ -1,0 +1,48 @@
+PRISM
+=====
+
+Version: 4.8
+Date: Fri Apr 26 01:06:13 GMT 2024
+Hostname: 251c7a009b5b
+Memory limits: cudd=1g, java(heap)=1g
+Command line: prism 654.pm 654.specs -exportstrat stdout
+
+Parsing model file "654.pm"...
+
+Type:        MDP
+Modules:     player
+Variables:   die1 die2 die3 die4 die5 die6 n rolled_1 rolled_2 rolled_3 rolled_4 rolled_5 rolled_6 to_roll got_6 got_5 got_4
+
+Parsing properties file "654.specs"...
+
+2 properties:
+(1) Pmax=? [ F (die1+die2+die3+die4+die5+die6=27) ]
+(2) Pmax=? [ F (die1+die2+die3+die4+die5+die6>=20) ]
+
+---------------------------------------------------------------------
+
+Model checking: Pmax=? [ F (die1+die2+die3+die4+die5+die6=27) ]
+
+Warning: Switching to explicit engine to allow strategy generation.
+
+Building model...
+
+Computing reachable states... 293681 401244 483420 503875 505364 506486
+
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+        at java.base/java.lang.Double.valueOf(Double.java:632)
+        at prism.Evaluator$EvaluatorDouble.add(Evaluator.java:287)
+        at prism.Evaluator$EvaluatorDouble.add(Evaluator.java:247)
+        at simulator.Updater.processUpdatesAndCreateNewChoice(Updater.java:377)
+        at simulator.Updater.calculateTransitions(Updater.java:216)
+        at simulator.ModulesFileModelGenerator.getTransitionListScalars(ModulesFileModelGenerator.java:759)
+        at simulator.ModulesFileModelGenerator.getTransitionList(ModulesFileModelGenerator.java:746)
+        at simulator.ModulesFileModelGenerator.getNumChoices(ModulesFileModelGenerator.java:451)
+        at explicit.ConstructModel.constructModel(ConstructModel.java:265)
+        at explicit.ConstructModel.constructModel(ConstructModel.java:150)
+        at prism.Prism.doBuildModel(Prism.java:2061)
+        at prism.Prism.buildModelIfRequired(Prism.java:1990)
+        at prism.Prism.modelCheck(Prism.java:3110)
+        at prism.PrismCL.run(PrismCL.java:424)
+        at prism.PrismCL.go(PrismCL.java:228)
+        at prism.PrismCL.main(PrismCL.java:2980)

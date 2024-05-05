@@ -1,0 +1,25 @@
+{
+    "name": "massacreland",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.vscode-typescript-tslint-plugin",
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode",
+                "ms-python.python",
+                "GitHub.copilot",
+                "VisualStudioExptTeam.vscodeintellicode",
+                "ms-python.vscode-pylance",
+                "donjayamanne.python-extension-pack",
+                "KevinRose.vsc-python-indent",
+                "esbenp.prettier-vscode"
+            ]},
+        "settings": {
+            "terminal.integrated.shell.linux": "/bin/bash"
+        }
+    },
+    "mounts": [{"source": "${localEnv:PWD}", "target": "/root/development", "type":"bind"}]
+}
