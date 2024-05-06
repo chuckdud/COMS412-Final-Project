@@ -1,5 +1,7 @@
 # Various Systems Modeled and Analyzed in PRISM
 
+Full report [here](./report.pdf)
+
 Here **PRISM** refers to both a *modeling language* and a *model checker*. This project uses the PRISM modeling language to represent various different systems to be analyzed with the PRISM model checker.
 
 ## Systems
