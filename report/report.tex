@@ -137,9 +137,9 @@ Formal Verification is a powerful tool used in verifying the correctness and rel
 Models of systems can easily contain trillions of states, in which case verification of a property over the entire system is very difficult. These systems still may be analyzed by applying simplifications to the model of the system, but the guarantees resulting from verification on the simplified model may not transfer to the real system.
 Additionally, many systems involve a level of uncertainty that clouds the definitive \textit{yes/no} property satisfaction we would like to assert on systems. The behavior of a system is likely influenced by the environment it operates in. For instance, the performance of a self-driving car is affected by the accuracy of its computer vision processing (a probabilistic process itself), the conditions of the road surface, and behavior of other (potentially manually operated) vehicles. These external influences on the behavior of a system are very difficult to capture in traditional verification methods, but may be extremely valuable in assessing the safety of that system. These systems may still be analyzed by applying certain assumptions to the environment, such as modeling the road surface conditions as a markovian process.\\
 
-In this report I present a study of multiple applications of probabilistic model checking to real world scenarios, such as air traffic control systems. I use PRISM model checker\cite{KNP11} and PRISM specification language to model and analyze these systems. For each system I provide quantitative analysis of safety properties.\\
+In this report I present a study of multiple applications of probabilistic model checking to real world scenarios, such as air traffic control systems. I use PRISM model checker and PRISM specification language to model and analyze these systems. For each system I provide quantitative analysis of safety properties.\\
 
-Included is a \href{https://github.com/chuckdud/COMS412-Final-Project}{GithHub repository} containing all source code for this project. The repository includes a \texttt{.devcontainer} file which can be used to start an editing environment inside a Docker container which includes all of the project dependencies. Instructions on how to start this environment can be found \href{https://code.visualstudio.com/docs/devcontainers/containers}{here}.
+Included is a \href{https://github.com/chuckdud/COMS412-Final-Project}{GithHub repository} containing all source code for this project. The repository includes a \texttt{.devcontainer} directory which can be used to start an editing environment inside a Docker container including all of the project dependencies. Instructions on how to start this environment can be found \href{https://code.visualstudio.com/docs/devcontainers/containers}{here}.
 
 \section{Terminology}
 1. \textbf{Discrete-Time Markov Chain}: \\
@@ -611,12 +611,12 @@ For \textbf{Through the Storm}, English specifications are provided in \textbf{O
  $\phi_1= \lozenge (x=5 \land y=5)$
 
  \item The aircraft eventually reaches its destination without entering a storm. \\
- $\phi_2= \phi_1 \land \lnot\texttt{damage}$, \\
+ $\phi_2= \phi_1 \land \Box\lnot\texttt{damage}$, \\
  for \texttt{damage} defined as $((x = p) \land (y = q) \land $ (\textit{present}$_{pq}$)), $(p,q)\in\{(0,4), (0,3), (1,3), (1,2), (2,2), (2,1), (3,1), (3,0), (4,0)\}$ \\
  (Reminder: \textit{present}$_{pq}$ is the boolean state variable of a storm at $(p,q)$ representing the state of the storm)
 
  \item The aircraft eventually reaches its destination while minimizing contact with storms below some threshold, $\psi = 2$. \\
- $\phi_3= \phi_1 \land \lnot(\texttt{damage} \land (\mathcal{X}(\mathcal{F}\texttt{ damage}))$, \\
+ $\phi_3= \phi_1 \land \Box\lnot(\texttt{damage} \land (\mathcal{X}(\lozenge\texttt{damage}))$, \\
   for \texttt{damage} defined as $((x = p) \land (y = q) \land $ (\textit{present}$_{pq}$)), $(p,q)\in\{(0,4), (0,3), (1,3), (1,2), (2,2), (2,1), (3,1), (3,0), (4,0)\}$
  (Reminder: \textit{present}$_{pq}$ is the boolean state variable of a storm at $(p,q)$ representing the state of the storm
 \end{itemize}
@@ -637,9 +637,7 @@ PRISM output from these computations is included in \texttt{through\_the\_storm/
 
 For each of the models, \textbf{Around the Storm}, \textbf{Air Traffic Control}, and \textbf{Through the Storm}, I have compiled a series of specifications and their maximum probability of satisfaction in their respective models. Each result gives insight into the properties of each system and allows for reasoning about how effective an agent may behave. Of course, all of these models are "toys" in that they bare little connection to real systems.  However, the practices used in these analyses to measure the probabilistic properties of each of these models serves as a proof of concept which could be applied to real, more complex, systems. \\
 
-Interesting results to note include analysis of $\phi_1$ in each model. $\phi_1$ represented the specification of "agent reaches its destination" in each model. Every analysis of these specifications resulted in probability $1.0$. This is due to the implementation of the agents; I did not implement trap states for "crashes" which could cause an agent to fail to reach its goal. Additionally, \textbf{Air Traffic Control's} $\phi_5$ represents the worst case behavior of this system. This case could represent a malicious actor who has taken control of our air traffic control system, and details exactly how likely they are to succeed in their attack.
-
-\section{Future Work}
+Interesting results to note include analysis of $\phi_1$ in each model. $\phi_1$ represented the specification of "agent reaches its destination", and every analysis of this specification resulted in probability $1.0$. This is due to the implementation of the agents as I did not implement proper transitions for "crashes". Also an interesting result is \textbf{Air Traffic Control's} $\phi_5$ which represents the worst case behavior of this system; This case could represent a malicious actor who has taken control of our air traffic control system, and details exactly how likely they are to succeed in their attack.
 
 \section{Extra Experimentation}
 
@@ -647,7 +645,22 @@ To extend my research and learning in probabilistic analysis, I also took on ano
 
 I made an effort to model this game as an MDP which I could analyze with respect to specifications such as "What is the maximum probability of ending with the of score 27?" or "What is the maximum probability of ending with a score greater than 20?" (these PRISM specifications are included in \texttt{654/654.specs}). I have included (what I believe to be) a working implementation of this game in \texttt{654/654.pm}, however I have not been able to validate my implementation. Additionally, the policy generated by PRISM is not as useful as I had initially hoped, likely because I poorly chose a game which does not involve many player-actions. \\
 
-Output from PRISM computation over this model for the specifications mentioned just above is contained in \texttt{654/out.log}.
+Output from PRISM computations over this model for the specifications mentioned just above is contained in \texttt{654/out.log}.
+
+\newpage
+\section{Bibliography}
+
+\begin{enumerate}
+    \item M. Kwiatkowska and G. Norman and D. Parker, 2011, \textit{PRISM 4.0: Verification of Probabilistic Real-time Systems}
+    \item T. Wongpiromsarn and R. D. Murray, 2020, Course Material for EECI\_IGSC-2020
+    \item Schäffeler, Maximilian and Abdulaziz, Mohammad, June 2023, \textit{Formally Verified Solution Methods for Markov Decision Processes}
+    \item Hansson, Hans and Jonsson, Bengt, 1994, \textit{A logic for reasoning about time 
+    and reliability}
+    \item Tingting Han and Katoen, J.-P. and Berteun, D., 2009 \textit{Counterexample generation in probabilistic model checking}
+    \item Lacerda, Bruno and Parker, David and Hawes, Nick, 2014, \textit{Optimal and dynamic planning for Markov decision processes with co-safe Properties}
+\end{enumerate}
 
 
+\bibliographystyle{ieee}
+\nocite{*}
 \end{document}
