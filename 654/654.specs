@@ -1,2 +1,2 @@
-Pmax=? [ F (die1 + die2 + die3 + die4 + die5 + die6 = 27) ]
-Pmax=? [ F (die1 + die2 + die3 + die4 + die5 + die6 >= 20)]
+Pmax=? [ F (die1 + die2 + die3 + die4 + die5 = 27) ]
+Pmax=? [ F (die1 + die2 + die3 + die4 + die5 >= 20)]

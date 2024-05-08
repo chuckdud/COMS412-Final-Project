@@ -2,47 +2,99 @@ PRISM
 =====
 
 Version: 4.8
-Date: Fri Apr 26 01:06:13 GMT 2024
-Hostname: 251c7a009b5b
+Date: Tue May 07 21:37:49 GMT 2024
+Hostname: 7c8bff646676
 Memory limits: cudd=1g, java(heap)=1g
-Command line: prism 654.pm 654.specs -exportstrat stdout
+Command line: prism 654.pm 654.specs
 
 Parsing model file "654.pm"...
 
 Type:        MDP
 Modules:     player
-Variables:   die1 die2 die3 die4 die5 die6 n rolled_1 rolled_2 rolled_3 rolled_4 rolled_5 rolled_6 to_roll got_6 got_5 got_4
+Variables:   die1 die2 die3 die4 die5 n rolled_1 rolled_2 rolled_3 rolled_4 rolled_5 to_roll got_6 got_5 got_4
 
 Parsing properties file "654.specs"...
 
 2 properties:
-(1) Pmax=? [ F (die1+die2+die3+die4+die5+die6=27) ]
-(2) Pmax=? [ F (die1+die2+die3+die4+die5+die6>=20) ]
+(1) Pmax=? [ F (die1+die2+die3+die4+die5=27) ]
+(2) Pmax=? [ F (die1+die2+die3+die4+die5>=20) ]
 
 ---------------------------------------------------------------------
 
-Model checking: Pmax=? [ F (die1+die2+die3+die4+die5+die6=27) ]
-
-Warning: Switching to explicit engine to allow strategy generation.
+Model checking: Pmax=? [ F (die1+die2+die3+die4+die5=27) ]
 
 Building model...
 
-Computing reachable states... 293681 401244 483420 503875 505364 506486
+Computing reachable states...
 
-Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
-        at java.base/java.lang.Double.valueOf(Double.java:632)
-        at prism.Evaluator$EvaluatorDouble.add(Evaluator.java:287)
-        at prism.Evaluator$EvaluatorDouble.add(Evaluator.java:247)
-        at simulator.Updater.processUpdatesAndCreateNewChoice(Updater.java:377)
-        at simulator.Updater.calculateTransitions(Updater.java:216)
-        at simulator.ModulesFileModelGenerator.getTransitionListScalars(ModulesFileModelGenerator.java:759)
-        at simulator.ModulesFileModelGenerator.getTransitionList(ModulesFileModelGenerator.java:746)
-        at simulator.ModulesFileModelGenerator.getNumChoices(ModulesFileModelGenerator.java:451)
-        at explicit.ConstructModel.constructModel(ConstructModel.java:265)
-        at explicit.ConstructModel.constructModel(ConstructModel.java:150)
-        at prism.Prism.doBuildModel(Prism.java:2061)
-        at prism.Prism.buildModelIfRequired(Prism.java:1990)
-        at prism.Prism.modelCheck(Prism.java:3110)
-        at prism.PrismCL.run(PrismCL.java:424)
-        at prism.PrismCL.go(PrismCL.java:228)
-        at prism.PrismCL.main(PrismCL.java:2980)
+Reachability (BFS): 6 iterations in 0.01 seconds (average 0.002500, setup 0.00)
+
+Time for model construction: 0.057 seconds.
+
+Warning: Deadlocks detected and fixed in 7776 states
+
+Type:        MDP
+States:      9331 (1 initial)
+Transitions: 17106
+Choices:     9331
+
+Transition matrix: 6490 nodes (4 terminal), 17106 minterms, vars: 34r/34c/7nd
+
+Prob0A: 6 iterations in 0.00 seconds (average 0.000667, setup 0.00)
+
+Prob1E: 4 iterations in 0.00 seconds (average 0.000750, setup 0.00)
+
+yes = 35, no = 9226, maybe = 70
+
+Computing remaining probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrices... [nm=5, levels=34, nodes=4173] [195.6 KB]
+Adding sparse bits... [levels=34-34, num=5, compact=5/5] [47.3 KB]
+Creating vector for yes... [dist=2, compact] [18.2 KB]
+Allocating iteration vectors... [3 x 72.9 KB]
+TOTAL: [479.8 KB]
+
+Starting iterations...
+
+Iterative method: 6 iterations in 0.00 seconds (average 0.000167, setup 0.00)
+
+Value in the initial state: 0.00450102873585391
+
+Time for model checking: 0.026 seconds.
+
+Result: 0.00450102873585391 (exact floating point)
+
+---------------------------------------------------------------------
+
+Model checking: Pmax=? [ F (die1+die2+die3+die4+die5>=20) ]
+
+Prob0A: 4 iterations in 0.01 seconds (average 0.002250, setup 0.00)
+
+Prob1E: 14 iterations in 0.02 seconds (average 0.001500, setup 0.00)
+
+yes = 2500, no = 6013, maybe = 818
+
+Computing remaining probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrices... [nm=5, levels=34, nodes=7350] [344.5 KB]
+Adding sparse bits... [levels=34-34, num=5, compact=5/5] [64.8 KB]
+Creating vector for yes... [dist=2, compact] [18.2 KB]
+Allocating iteration vectors... [3 x 72.9 KB]
+TOTAL: [646.3 KB]
+
+Starting iterations...
+
+Iterative method: 6 iterations in 0.01 seconds (average 0.000167, setup 0.01)
+
+Value in the initial state: 0.30516975113811723
+
+Time for model checking: 0.039 seconds.
+
+Result: 0.30516975113811723 (exact floating point)
+
+---------------------------------------------------------------------
+
+Note: There was 1 warning during computation.
+
