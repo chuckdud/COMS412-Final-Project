@@ -1,4 +1,8 @@
-Pmax=? [G (!collision) & (F(p=5 & b=5))]
+Pmax=? [F (p=5 & b=5)]
+
+Pmax=? [(F (p=5 & b=5)) & (G (!collision))]
+
+Pmax=? [G ((!collision) & (X(p=6) => (X(b=4))))]
 
 Pmax=? [F (p=7 & b=3)]
 

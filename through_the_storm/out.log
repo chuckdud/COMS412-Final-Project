@@ -1,0 +1,168 @@
+PRISM
+=====
+
+Version: 4.8
+Date: Tue May 07 21:38:27 GMT 2024
+Hostname: 7c8bff646676
+Memory limits: cudd=1g, java(heap)=1g
+Command line: prism restricted.pm through_the_storm.specs
+
+Parsing model file "restricted.pm"...
+
+Type:        MDP
+Modules:     aircraft storm04 storm03 storm13 storm12 storm22 storm21 storm31 storm30 storm40
+Variables:   x y heading present04 present03 present13 present12 present22 present21 present31 present30 present40
+
+Parsing properties file "through_the_storm.specs"...
+
+3 properties:
+(1) Pmax=? [ G (F (reach_goal)) ]
+(2) Pmax=? [ G (F (reach_goal))&!(damage) ]
+(3) Pmax=? [ G (F (reach_goal))&!(damage&(X (F damage))) ]
+
+---------------------------------------------------------------------
+
+Model checking: Pmax=? [ G (F (reach_goal)) ]
+
+Building model...
+
+Computing reachable states...
+
+Reachability (BFS): 11 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Time for model construction: 0.017 seconds.
+
+Type:        MDP
+States:      25600 (1 initial)
+Transitions: 47185920
+Choices:     46080
+
+Transition matrix: 443 nodes (21 terminal), 47185920 minterms, vars: 16r/16c/3nd
+
+Building deterministic automaton (for G (F "L0"))...
+DRA has 4 states, 1 Rabin pairs.
+Time for deterministic automaton translation: 0.031 seconds.
+
+Constructing MDP-DRA product...
+
+Reachability (BFS): 11 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+Time for product construction: 0.002 seconds.
+
+States:      26624 (1 initial)
+Transitions: 48234496
+Choices:     47104
+
+Transition matrix: 513 nodes (21 terminal), 48234496 minterms, vars: 18r/18c/3nd
+
+Finding accepting end components...
+
+Computing reachability probabilities...
+
+Prob0A: 11 iterations in 0.01 seconds (average 0.000455, setup 0.00)
+
+Prob1E: 12 iterations in 0.00 seconds (average 0.000083, setup 0.00)
+
+yes = 26624, no = 0, maybe = 0
+
+Value in the initial state: 1.0
+
+Time for model checking: 0.045 seconds.
+
+Result: 1.0
+
+---------------------------------------------------------------------
+
+Model checking: Pmax=? [ G (F (reach_goal))&!(damage) ]
+
+Building deterministic automaton (for G (F "L0")&"L1")...
+DRA has 5 states, 1 Rabin pairs.
+Time for deterministic automaton translation: 0.002 seconds.
+
+Constructing MDP-DRA product...
+
+Reachability (BFS): 11 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+Time for product construction: 0.005 seconds.
+
+States:      41472 (1 initial)
+Transitions: 73924608
+Choices:     72192
+
+Transition matrix: 5861 nodes (21 terminal), 73924608 minterms, vars: 19r/19c/3nd
+
+Finding accepting end components...
+
+Computing reachability probabilities...
+
+Prob0A: 11 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Prob1E: 14 iterations in 0.00 seconds (average 0.000071, setup 0.00)
+
+yes = 11264, no = 19456, maybe = 10752
+
+Computing remaining probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrices... [nm=3, levels=19, nodes=7796] [365.4 KB]
+Adding sparse bits... [levels=6-6, num=360, compact=3/3] [2.1 MB]
+Creating vector for yes... [dist=2, compact] [81.0 KB]
+Allocating iteration vectors... [3 x 324.0 KB]
+TOTAL: [3.5 MB]
+
+Starting iterations...
+
+Iterative method: 66 iterations in 1.62 seconds (average 0.024455, setup 0.01)
+
+Value in the initial state: 0.4692561170484501
+
+Time for model checking: 1.641 seconds.
+
+Result: 0.4692561170484501
+
+---------------------------------------------------------------------
+
+Model checking: Pmax=? [ G (F (reach_goal))&!(damage&(X (F damage))) ]
+
+Building deterministic automaton (for G (F "L0")&!("L1"&(X (F "L1"))))...
+DRA has 11 states, 1 Rabin pairs.
+Time for deterministic automaton translation: 0.005 seconds.
+
+Constructing MDP-DRA product...
+
+Reachability (BFS): 11 iterations in 0.00 seconds (average 0.000091, setup 0.00)
+Time for product construction: 0.003 seconds.
+
+States:      61952 (1 initial)
+Transitions: 109576192
+Choices:     107008
+
+Transition matrix: 7303 nodes (21 terminal), 109576192 minterms, vars: 20r/20c/3nd
+
+Finding accepting end components...
+
+Computing reachability probabilities...
+
+Prob0A: 11 iterations in 0.00 seconds (average 0.000091, setup 0.00)
+
+Prob1E: 26 iterations in 0.00 seconds (average 0.000077, setup 0.00)
+
+yes = 22528, no = 19456, maybe = 19968
+
+Computing remaining probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrices... [nm=3, levels=20, nodes=12313] [577.2 KB]
+Adding sparse bits... [levels=5-5, num=600, compact=3/3] [1.0 MB]
+Creating vector for yes... [dist=2, compact] [121.0 KB]
+Allocating iteration vectors... [3 x 484.0 KB]
+TOTAL: [3.1 MB]
+
+Starting iterations...
+
+Iterative method: 56 iterations in 2.32 seconds (average 0.041286, setup 0.01)
+
+Value in the initial state: 0.8267056300097458
+
+Time for model checking: 2.339 seconds.
+
+Result: 0.8267056300097458
+

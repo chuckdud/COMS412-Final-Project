@@ -8,7 +8,6 @@ mdp
     die3 : [1..6] init 1;
     die4 : [1..6] init 1;
     die5 : [1..6] init 1;
-    die6 : [1..6] init 1;
 
     // current turn
     n : [1..4] init 1;
@@ -19,7 +18,6 @@ mdp
     rolled_3 : bool init false;
     rolled_4 : bool init false;
     rolled_5 : bool init false;
-    rolled_6 : bool init false;
 
     // number of dice player must roll to complete this turn
     to_roll: [0..6] init 6;
@@ -34,6 +32,7 @@ mdp
     //  actions:
     //      roll_n: roll die n
     //      next_turn: roll no more dice this turn and move to next turn
+    //      quit: forfeit remaining turns
 
     
     // player must roll all non-654 dice OR quit
@@ -43,7 +42,6 @@ mdp
             (rolled_3'=(got_6 = 3 | got_5 = 3 | got_4 = 3)) &
             (rolled_4'=(got_6 = 4 | got_5 = 4 | got_4 = 4)) &
             (rolled_5'=(got_6 = 5 | got_5 = 5 | got_4 = 5)) &
-            (rolled_6'=(got_6 = 6 | got_5 = 6 | got_4 = 6)) &
             (to_roll' = (got_6!=0) ? ((got_5!=0) ? ((got_4!=0) ? 2 : 3) : 4) : 5 )&
             (n'=n+1);
 
@@ -95,14 +93,5 @@ mdp
         0.166666667: (die5'=4) & (rolled_5' = true) & (to_roll'=to_roll-1) & (got_4' = got_5!=0 ? 5 : got_4) +
         0.166666666: (die5'=5) & (rolled_5' = true) & (to_roll'=to_roll-1) & (got_5' = got_6!=0 ? 5 : got_5) +
         0.166666666: (die5'=6) & (rolled_5' = true) & (to_roll'=to_roll-1) & (got_6' = 5) ;  
-
-    [roll_6] n < 4 & rolled_5 & !rolled_6 & to_roll > 0 & //not finished and haven't yet rolled this die
-            got_6 != 6 & got_5 != 6 & got_4 != 6 -> // this die is not 6 (ship) 5 (captain), or 4 (crew)
-        0.166666667: (die6'=1) & (rolled_6' = true) & (to_roll'=to_roll-1) + 
-        0.166666667: (die6'=2) & (rolled_6' = true) & (to_roll'=to_roll-1) +
-        0.166666667: (die6'=3) & (rolled_6' = true) & (to_roll'=to_roll-1) +
-        0.166666667: (die6'=4) & (rolled_6' = true) & (to_roll'=to_roll-1) & (got_4' = got_5!=0 ? 6 : got_4) +
-        0.166666666: (die6'=5) & (rolled_6' = true) & (to_roll'=to_roll-1) & (got_5' = got_6!=0 ? 6 : got_5) +
-        0.166666666: (die6'=6) & (rolled_6' = true) & (to_roll'=to_roll-1) & (got_6' = 6) ; 
 
     endmodule

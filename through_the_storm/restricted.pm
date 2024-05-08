@@ -65,7 +65,7 @@ mdp
     x = 2 & y = 2 & present22 |
 
     x = 2 & y = 1 & present21 |
-    x = 2 & y = 2 & present22 |
+    x = 3 & y = 1 & present31 |
 
     x = 3 & y = 0 & present30 |
     x = 4 & y = 0 & present40

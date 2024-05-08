@@ -1,6 +1,6 @@
 Pmax=? [G (F (reach_goal))]
 
-Pmax=? [G (F (reach_goal)) & !(damage)]
+Pmax=? [G (F (reach_goal)) & (G !(damage))]
 
-Pmax=? [G (F (reach_goal)) & !(damage & (X damage))]
+Pmax=? [G (F (reach_goal)) & (G !(damage & (X (F damage))))]
 
